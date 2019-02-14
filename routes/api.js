@@ -54,11 +54,23 @@ router.get('/articles', (req, res, next) => {
       // 分頁處理 - End
     })
     .then(() => {
+      // 回傳資料過濾
+      data = data.map((item) => {
+        const val = {
+          content: item.content,
+          title: item.title,
+          update_time: item.update_time,
+          category_name: categories[item.category].name,
+        };
+        return Object.keys(val).sort().reduce((b, c) => (b[c] = val[c], b), {});
+      })
+      return Promise.resolve('Success');
+    })
+    .then(() => {
       res.send({
         success: true,
         content: {
           articles: data,
-          categories,
           page,
         },
       });
@@ -152,6 +164,7 @@ router.get('/user/:account_name/info', (req, res, next) => {
             email: user.email,
             job: user.job,
             nickname: user.nickname,
+            picture: user.picture
           },
         });
       }
