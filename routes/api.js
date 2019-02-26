@@ -37,7 +37,7 @@ router.get('/articles', (req, res) => {
     .then((snapshot) => {
       categories = snapshot.val();
       return articlesRef
-        .orderByChild('update_time')
+        .orderByChild('updateTime')
         .once('value');
     })
     .then((snapshot) => {
@@ -77,8 +77,8 @@ router.get('/articles', (req, res) => {
           const val = {
             content: item.content,
             title: item.title,
-            update_time: item.update_time,
-            category_name: categories[item.category].name,
+            updateTime: item.updateTime,
+            categoryName: categories[item.category].name,
           };
           // 排序 - 照字母排序
           return Object.keys(val).sort().reduce((b, c) => (b[c] = val[c], b), {});
@@ -206,7 +206,7 @@ router.get('/admin/archives', (req, res) => {
     .then((snapshot) => {
       categories = snapshot.val();
       return articlesRef
-        .orderByChild('update_time')
+        .orderByChild('updateTime')
         .once('value');
     })
     .then((snapshot) => {
