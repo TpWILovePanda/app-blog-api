@@ -9,7 +9,7 @@ const router = express.Router();
 // 分頁計算模組
 const convertPagination = require('../modules/convertPagination');
 
-/* 資料庫 */
+/* == 資料庫 == */
 const db = require('../connections/firebase_admin');
 const firebase = require('../connections/firebase_client');
 const categoriesRef = db.ref('/blog/categories/');
